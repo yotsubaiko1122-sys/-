@@ -1,5 +1,5 @@
 
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getProgress, isMastered } from '../services/storage';
 // CHAPTERS is exported from services/wordData.ts, not types.ts
 import { LearningProgress, StudySet } from '../types';
@@ -12,7 +12,8 @@ interface MenuScreenProps {
 
 const MenuScreen: React.FC<MenuScreenProps> = ({ onStartQuiz, onShowHistory }) => {
   const [progress, setProgress] = useState<LearningProgress>({});
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['s1']));
+  const initialSectionId = CHAPTERS[0]?.sections[0]?.id ?? ''
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(initialSectionId ? [initialSectionId] : []));
 
   useEffect(() => {
     setProgress(getProgress());
@@ -54,10 +55,10 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ onStartQuiz, onShowHistory }) =
     <div className="w-full max-w-4xl mx-auto p-4 md:p-6 flex flex-col min-h-screen bg-stone-50">
       <div className="text-center mb-8 pt-6">
         <h1 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-2 tracking-tighter">
-          日本史一問一答
+          日本史一問一答フラッシュカード
         </h1>
         <div className="inline-block px-4 py-1 bg-primary text-white text-sm font-bold rounded-full mb-4">
-          標準コース
+          第7章 幕藩体制の展開
         </div>
         <div className="flex justify-center gap-4">
           <button 

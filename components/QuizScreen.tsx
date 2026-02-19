@@ -10,7 +10,8 @@ interface QuizScreenProps {
   onReturnToMenu: () => void;
 }
 
-const QuizScreen: React.FC<QuizScreenProps> = ({ quizList, onComplete, onReturnToMenu }) => {
+const QuizScreen: React.FC<QuizScreenProps> = ({ quizList, fullWordList, onComplete, onReturnToMenu }) => {
+  void fullWordList;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sessionScore, setSessionScore] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
